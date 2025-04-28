@@ -1,0 +1,134 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+public class MilestoKM extends JFrame implements ChangeListener {
+    private JSpinner milesOptions;
+    private JLabel miles;
+    private JLabel kilometers;
+    private JTextField milesFields;
+
+    MilestoKM() {
+        int initMile;
+        int minMile;
+        int maxMile;
+        int stepVal;
+
+        initMile = 0;
+        minMile = 0;
+        maxMile = 1000;
+        stepVal = 100;
+
+        GridBagConstraints layoutConst = null;
+
+        SpinnerNumberModel spinnerModel = null;
+
+        setTitle("Miles to Kilometers");
+
+        miles = new JLabel("Select Miles:");
+        kilometers = new JLabel("Kilometers:");
+
+        spinnerModel = new SpinnerNumberModel(initMile, minMile, maxMile, stepVal);
+        milesOptions = new JSpinner(spinnerModel);
+        milesOptions.addChangeListener(this);
+        milesFields = new JTextField(10);
+
+        setLayout(new GridBagLayout());
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 10);
+        layoutConst.anchor = GridBagConstraints.LINE_END;
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 0;
+        add(miles, layoutConst);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 10);
+        layoutConst.anchor = GridBagConstraints.LINE_END;
+        layoutConst.gridx = 0;
+        layoutConst.gridy = 1;
+        add(kilometers, layoutConst);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 10);
+        layoutConst.fill = GridBagConstraints.HORIZONTAL;
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 0;
+        add(milesOptions, layoutConst);
+
+        layoutConst = new GridBagConstraints();
+        layoutConst.insets = new Insets(10, 10, 10, 10);
+        layoutConst.anchor = GridBagConstraints.LINE_END;
+        layoutConst.gridx = 1;
+        layoutConst.gridy = 1;
+        add(milesFields, layoutConst);
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent event) {
+        Integer miles;
+
+        miles = (Integer) milesOptions.getValue();
+
+        switch (miles) {
+            case 0:
+                milesFields.setText("0");
+                break;
+
+            case 100:
+                milesFields.setText("160.934");
+                break;
+
+            case 200:
+                milesFields.setText("321.869");
+                break;
+
+            case 300:
+                milesFields.setText("482.803");
+                break;
+
+            case 400:
+                milesFields.setText("643.738");
+                break;
+
+            case 500:
+                milesFields.setText("804.672");
+                break;
+
+            case 600:
+                milesFields.setText("965.606");
+                break;
+
+            case 700:
+                milesFields.setText("1126.54");
+                break;
+
+            case 800:
+                milesFields.setText("1287.48");
+                break;
+
+            case 900:
+                milesFields.setText("1448.41");
+                break;
+
+            case 1000:
+                milesFields.setText("1609.34");
+                break;
+            default:
+                milesFields.setText("0");
+        }
+    }
+
+    public static void main(String[] args) {
+        MilestoKM myFrame = new MilestoKM();
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.pack();
+        myFrame.setVisible(true);
+    }
